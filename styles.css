@@ -4,77 +4,106 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --text: #121212;
+    --muted: #5b5f66;
+    --muted-2: #6b7280;
+    --shadow-rest: 0 1px 0 rgba(0, 0, 0, 0.02), 0 10px 28px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --radius: 14px;
+    --transition: all 0.25s ease;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #0f0f0f;
-    color: #e8e8e8;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: 48px 20px;
 }
 
 .cards-container {
-    display: flex;
-    flex-direction: row;
+    width: min(1100px, 100%);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
     gap: 24px;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
+}
+
+@media (max-width: 980px) {
+    .cards-container {
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    border: 2px solid transparent;
-    padding: 12px;
-    width: 320px;
-    flex-shrink: 0;
+    --accent: #c5d9c8;
+    --accent-hover: #a9c7ad;
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--accent);
+    padding: 40px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-rest);
+    transition: var(--transition);
+    will-change: transform, box-shadow, border-color;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-hover);
 }
 
 .card--hobby {
-    border-color: #34d399;
-}
-
-.card--hobby .card-icon {
-    color: #34d399;
+    --accent: #c5d9c8;
+    --accent-hover: #b0cfb5;
 }
 
 .card--pro {
-    border-color: #60a5fa;
-}
-
-.card--pro .card-icon {
-    color: #60a5fa;
+    --accent: #c5cae9;
+    --accent-hover: #afb7e0;
 }
 
 .card--business {
-    border-color: #fbbf24;
-}
-
-.card--business .card-icon {
-    color: #fbbf24;
+    --accent: #ead9c4;
+    --accent-hover: #e1caa7;
 }
 
 .card-icon {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
+    color: var(--accent);
 }
 
 .card-title {
     font-size: 32px;
-    font-weight: 400;
-    color: #f0f0f0;
-    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
 }
 
 .card-price {
-    font-size: 20px;
-    color: #9ca3af;
-    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 28px;
 }
 
 .card-content {
@@ -83,8 +112,8 @@ body {
 
 .includes-text {
     font-size: 16px;
-    color: #d1d5db;
-    margin-bottom: 16px;
+    color: var(--muted-2);
+    margin-bottom: 18px;
 }
 
 .features-list {
@@ -94,37 +123,42 @@ body {
 
 .features-list li {
     display: flex;
-    align-items: center;
-    margin-bottom: 12px;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
     font-size: 15px;
-    color: #d1d5db;
+    color: var(--muted-2);
+    line-height: 1.6;
 }
 
 .checkmark {
-    color: #9ca3af;
+    color: rgba(26, 26, 26, 0.5);
     font-size: 18px;
-    margin-right: 12px;
     font-weight: bold;
+    flex: 0 0 auto;
+    transform: translateY(1px);
 }
 
 .download-button {
     width: fit-content;
-    background-color: #2a2a2a;
-    border: 1px solid #3f3f3f;
+    background-color: #1a1a1a;
+    border: 1px solid #1a1a1a;
     border-radius: 999px;
     padding: 14px 24px;
     font-size: 16px;
     font-weight: 500;
-    color: #f0f0f0;
+    color: #ffffff;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: var(--transition);
+    margin-top: auto;
 }
 
 .download-button:hover {
-    background-color: #363636;
-    border-color: #525252;
+    background-color: #111111;
+    border-color: #111111;
+    transform: scale(1.02);
 }
 
 .download-button:active {
-    background-color: #363636;
+    background-color: #111111;
 }
